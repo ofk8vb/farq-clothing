@@ -14,6 +14,33 @@ const config={
     measurementId: "G-8B1F4TSHVV"
   };
 
+  export const createUserProfileDocument= async(userAuth, additionalData)=>{
+    if(!userAuth) return;
+
+    const userRef = firestore.doc(`users/${userAuth.uid}`);
+    const snapShot = await userRef.get();
+
+    if(!snapShot.exists){
+        const{displayName,email} = userAuth;
+        const createdAt = new Date();
+
+        try{
+            await userRef.set({
+                displayName,
+                email,
+                createdAt,
+                ...additionalData
+            })
+        }catch(error){
+            console.log('error creating user', error.message)
+
+        }
+    }
+
+    return userRef;
+
+  }
+
 
   firebase.initializeApp(config);
 
@@ -22,7 +49,7 @@ const config={
 
   const provider = new firebase.auth.GoogleAuthProvider();
 
-  //google pup up will come whenever we use google auth service
+  //google pop up will come whenever we use google auth service
   provider.setCustomParameters({propmpt:'select_account'});
   //we want to sign up with the provider we created which is GoogleAuthProvider
   export const SignInWithGoogle = () => auth.signInWithPopup(provider);
