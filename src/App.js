@@ -18,6 +18,7 @@ class App extends React.Component {
 
   componentDidMount(){
 
+    //store'dan action propstan cekip destructure edilecek
     const {setCurrentUser} = this.props
     this.unsubscribeFromAuth=auth.onAuthStateChanged(async userAuth =>{
       if(userAuth){
