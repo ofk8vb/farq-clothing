@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import './header.styles.scss'
-import {HeaderContainer, LogoContainer, OptionsContainer,OptionDiv, OptionLink} from './header.styles'
+import {HeaderContainer, LogoContainer, OptionsContainer,OptionLink} from './header.styles'
 import {ReactComponent as Logo} from '../../assets/farqIcon.svg'
 import {auth} from '../../firebase/firebase.utils'
 import {connect} from 'react-redux'
@@ -19,16 +19,12 @@ const Header =({currentUser,hidden}) =>(
         </LogoContainer>
         <span className='company-name'>farq's store</span>
      <OptionsContainer>
-        <OptionLink to='/shop'>
-            SHOP
-        </OptionLink>
-        <OptionLink to='/shop'>
-            Contact
-        </OptionLink>
+        <OptionLink to='/shop'> SHOP</OptionLink>
+        <OptionLink to='/shop'>Contact</OptionLink>
         { currentUser ? (
-            <OptionDiv onClick={()=>auth.signOut()}>
+            <OptionLink as='div' onClick={()=>auth.signOut()}>
                 SIGN OUT
-            </OptionDiv>
+            </OptionLink>
         ):(
             <OptionLink className='option' to='/signin'>
                 SIGN IN
