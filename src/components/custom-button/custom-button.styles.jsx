@@ -38,13 +38,8 @@ const googleSignInStyles = css`
 const getButtonStyles = props => {
     if(props.googleSignIn){
         return googleSignInStyles;
-
     }
-
     return props.inverted?invertedButtonStyles: buttonStyles;
-
-
-
 }
 
 
@@ -65,6 +60,7 @@ font-weight: bolder;
 cursor: pointer;
 display:flex;
 justify-content:center;
+
 
 ${getButtonStyles}
 
