@@ -23,7 +23,7 @@ class App extends React.Component {
 
 
     //store'dan action propstan cekip destructure edilecek
-    const {setCurrentUser,collectionsArray} = this.props
+    const {setCurrentUser} = this.props
     this.unsubscribeFromAuth=auth.onAuthStateChanged(async userAuth =>{
       if(userAuth){
         const userRef=await createUserProfileDocument(userAuth);
@@ -36,7 +36,6 @@ class App extends React.Component {
           })
       }
       setCurrentUser(userAuth);
-      addCollectionAndDocuments('collections',collectionsArray.map(({title,items})=>({title,items})));
     })
   }
 
@@ -61,7 +60,6 @@ class App extends React.Component {
 }
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
-  collectionsArray: selectCollectionsForPreview
 })
 
 const mapDispatchToProps = dispatch =>({
