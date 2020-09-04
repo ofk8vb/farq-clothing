@@ -81,11 +81,11 @@ const config={
   export const auth = firebase.auth();
   export const firestore = firebase.firestore();
 
-  const provider = new firebase.auth.GoogleAuthProvider();
+  export const googleProvider = new firebase.auth.GoogleAuthProvider();
 
   //google pop up will come whenever we use google auth service
-  provider.setCustomParameters({propmpt:'select_account'});
+  googleProvider.setCustomParameters({propmpt:'select_account'});
   //we want to sign up with the provider we created which is GoogleAuthProvider
-  export const SignInWithGoogle = () => auth.signInWithPopup(provider);
+  export const SignInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
   export default firebase;
