@@ -6,9 +6,8 @@ import CheckoutPage from './pages/checkout/checkout.component'
 import {Route, Switch,Redirect} from 'react-router-dom'
 import Header from './components/header/header.component.jsx'
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component.jsx'
-import {auth,createUserProfileDocument,addCollectionAndDocuments} from './firebase/firebase.utils'
+import {checkUserSession} from './redux/user/user.actions';
 import {connect} from 'react-redux';
-import {setCurrentUser} from './redux/user/user.actions'
 import {selectCurrentUser} from './redux/user/user.selectors'
 import {createStructuredSelector} from 'reselect';
 import styled from 'styled-components';
@@ -19,9 +18,8 @@ class App extends React.Component {
   unsubscribeFromAuth=null;
 
   componentDidMount(){
-
-    const {setCurrentUser} = this.props;
-
+    const {checkUserSession} = this.props;
+    checkUserSession();
 
 
     //store'dan action propstan cekip destructure edilecek
@@ -65,6 +63,8 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = dispatch =>({
-    setCurrentUser : user =>dispatch(setCurrentUser(user))
- })
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+  checkUserSession:()=>dispatch(checkUserSession())
+})
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);
